@@ -9,13 +9,15 @@ export default new Vuex.Store({
     lastPage: 9,
     currentPage: 1,
     characters: [],
-    activeCharacter: {}
+    activeCharacter: {},
+    planet: {}
   },
   getters: {
     getCurrentPage: state => state.currentPage,
     getLastPage: state => state.lastPage,
     getCharacters: state => state.characters,
-    getActiveCharacter: state => state.activeCharacter
+    getActiveCharacter: state => state.activeCharacter,
+    getPlanet: state => state.planet
   },
   mutations: {
     setCharacters: (state, characters) => {
@@ -36,6 +38,9 @@ export default new Vuex.Store({
     },
     setActiveCharacter: (state, character) => {
       state.activeCharacter = character
+    },
+    setPlanet: (state, planet) => {
+      state.planet = planet
     }
   },
   actions: {
@@ -50,6 +55,10 @@ export default new Vuex.Store({
     },
     updateActiveCharacter: ({commit}, character) => {
       commit('setActiveCharacter', character)
+    },
+    updatePlanet: async ({commit}, planetUrl) => {
+      const planet = await api.getData(planetUrl)
+      commit('setPlanet', planet)
     }
   },
   modules: {

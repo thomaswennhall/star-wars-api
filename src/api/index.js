@@ -12,8 +12,7 @@ const getCharactersByPage = async (page = 1) => {
   return data
 }
 
-//TEST ---- getCharactersByPage(2).then(console.log)
-
 module.exports = {
-  getCharactersByPage
+  getCharactersByPage,
+  getData
 }

@@ -13,13 +13,19 @@
       </ul>
       <p>*Before <a :href="infoLink" target="_blank">Battle of Yavin</a></p>
     </article>
+    <button @click="showPlanet" >planet</button>
+    <PlanetDetails v-if="planet" />
   </section>
 </template>
 
 <script>
+import PlanetDetails from './PlanetDetails'
+
 export default {
+  components: { PlanetDetails },
   data(){ return {
-    infoLink: 'https://starwars.fandom.com/wiki/Battle_of_Yavin'
+    infoLink: 'https://starwars.fandom.com/wiki/Battle_of_Yavin',
+    planet: false
   }},
 
   computed: {
@@ -31,6 +37,10 @@ export default {
   methods: {
     hide() {
       this.$emit('hide')
+    },
+    async showPlanet() {
+      await this.$store.dispatch('updatePlanet', this.character.homeworld)
+      this.planet = true
     }
   }
 }
