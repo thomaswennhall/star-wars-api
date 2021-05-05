@@ -8,12 +8,14 @@ export default new Vuex.Store({
   state: {
     lastPage: 9,
     currentPage: 1,
-    characters: []
+    characters: [],
+    activeCharacter: {}
   },
   getters: {
     getCurrentPage: state => state.currentPage,
     getLastPage: state => state.lastPage,
-    getCharacters: state => state.characters
+    getCharacters: state => state.characters,
+    getActiveCharacter: state => state.activeCharacter
   },
   mutations: {
     setCharacters: (state, characters) => {
@@ -31,6 +33,9 @@ export default new Vuex.Store({
       }else{
         state.currentPage--
       }
+    },
+    setActiveCharacter: (state, character) => {
+      state.activeCharacter = character
     }
   },
   actions: {
@@ -42,6 +47,9 @@ export default new Vuex.Store({
     },
     updatePage: async ({commit}, direction) => {
       commit('setPage', direction)
+    },
+    updateActiveCharacter: ({commit}, character) => {
+      commit('setActiveCharacter', character)
     }
   },
   modules: {

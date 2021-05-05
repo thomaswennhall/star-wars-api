@@ -1,7 +1,10 @@
 <template>
   <section class="characters">
     <ul>
-      <li v-for="character in characters" :key="character.id" >
+      <li v-for="character in characters" 
+        :key="character.name"
+        @click="showDetails(character)"
+      >
         {{ character.name }}
       </li>
     </ul>
@@ -21,6 +24,13 @@ export default {
     }
   },
 
+  methods: {
+    async showDetails(character) {
+      this.$emit('showDetails')
+      await this.$store.dispatch('updateActiveCharacter', character)
+    }
+  },
+
   async mounted() {
     await this.$store.dispatch('updateCharacters')
   }
@@ -29,9 +39,11 @@ export default {
 
 <style lang="scss" scoped>
   .characters{
-    margin: 1rem auto;
+    height: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
 </style>
