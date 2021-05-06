@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import api from '@/api'
+import Vue from "vue";
+import Vuex from "vuex";
+import api from "@/api";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -10,57 +10,76 @@ export default new Vuex.Store({
     currentPage: 1,
     characters: [],
     activeCharacter: {},
-    planet: {}
+    planet: {},
+    starships: [],
+    vehicles: [],
   },
   getters: {
-    getCurrentPage: state => state.currentPage,
-    getLastPage: state => state.lastPage,
-    getCharacters: state => state.characters,
-    getActiveCharacter: state => state.activeCharacter,
-    getPlanet: state => state.planet
+    getCurrentPage: (state) => state.currentPage,
+    getLastPage: (state) => state.lastPage,
+    getCharacters: (state) => state.characters,
+    getActiveCharacter: (state) => state.activeCharacter,
+    getPlanet: (state) => state.planet,
+    getStarships: (state) => state.starships,
+    getVehicles: (state) => state.vehicles,
   },
   mutations: {
     setCharacters: (state, characters) => {
-      state.characters = characters
+      state.characters = characters;
     },
     setPage: (state, direction) => {
-      if(direction === 'next'){
-        if(state.currentPage === state.lastPage){
-          state.currentPage = 1
-        }else{
-          state.currentPage++
+      if (direction === "next") {
+        if (state.currentPage === state.lastPage) {
+          state.currentPage = 1;
+        } else {
+          state.currentPage++;
         }
-      }else if(state.currentPage === 1){
-        state.currentPage = state.lastPage
-      }else{
-        state.currentPage--
+      } else if (state.currentPage === 1) {
+        state.currentPage = state.lastPage;
+      } else {
+        state.currentPage--;
       }
     },
     setActiveCharacter: (state, character) => {
-      state.activeCharacter = character
+      state.activeCharacter = character;
     },
     setPlanet: (state, planet) => {
-      state.planet = planet
-    }
+      state.planet = planet;
+    },
+    setStarships: (state, starships) => {
+      state.starships = starships;
+    },
+    setVehicles: (state, vehicles) => {
+      state.vehicles = vehicles;
+    },
   },
   actions: {
-    updateCharacters: async ({commit, getters}) => {
-      const page = getters.getCurrentPage
-      const data = await api.getCharactersByPage(page)
-      const characters = data.results
-      commit('setCharacters', characters)
+    updateCharacters: async ({ commit, getters }) => {
+      const page = getters.getCurrentPage;
+      const data = await api.getCharactersByPage(page);
+      const characters = data.results;
+      commit("setCharacters", characters);
     },
-    updatePage: async ({commit}, direction) => {
-      commit('setPage', direction)
+    updatePage: async ({ commit }, direction) => {
+      commit("setPage", direction);
     },
-    updateActiveCharacter: ({commit}, character) => {
-      commit('setActiveCharacter', character)
+    updateActiveCharacter: ({ dispatch, commit }, character) => {
+      dispatch("updatePlanet", character.homeworld);
+      dispatch("updateStarships", character.starships);
+      dispatch("updateVehicles", character.vehicles);
+      commit("setActiveCharacter", character);
     },
-    updatePlanet: async ({commit}, planetUrl) => {
-      const planet = await api.getData(planetUrl)
-      commit('setPlanet', planet)
-    }
+    updatePlanet: async ({ commit }, planetUrl) => {
+      const planet = await api.getData(planetUrl);
+      commit("setPlanet", planet);
+    },
+    updateStarships: async ({ commit }, urlArray) => {
+      const starships = await api.getDataFromArray(urlArray);
+      commit("setStarships", starships);
+    },
+    updateVehicles: async ({ commit }, urlArray) => {
+      const vehicles = await api.getDataFromArray(urlArray);
+      commit("setVehicles", vehicles);
+    },
   },
-  modules: {
-  }
-})
+});

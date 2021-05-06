@@ -2,35 +2,40 @@
 <template>
   <section class="character-details">
     <button @click="hide" >hide details</button>
-    <article>
-      <ul>
-        <li>Birth year: {{ character.birth_year }}*</li>
-        <li>Height: {{ character.height }} cm</li>
-        <li>Weight: {{ character.mass }} kg</li>
-        <li>Eye color: {{ character.eye_color }}</li>
-        <li>Hair color: {{ character.hair_color }}</li>
-        <li>gender: {{ character.gender }}</li>
-      </ul>
-      <p>*Before <a :href="infoLink" target="_blank">Battle of Yavin</a></p>
-    </article>
+    <CharacterInfo :character="character" />
     <button @click="showPlanet" >planet</button>
-    <PlanetDetails v-if="planet" />
+    <button @click="showStarships" >Starships</button>
+    <button @click="showVehicles" >Vehicles</button>
+    <PlanetDetails v-if="focus.planet" />
+    <ListDetails v-if="focus.starships" :data="starships" />
+    <ListDetails v-if="focus.vehicles" :data="vehicles" />
   </section>
 </template>
 
 <script>
+import CharacterInfo from './CharacterInfo'
 import PlanetDetails from './PlanetDetails'
+import ListDetails from './ListDetails'
 
 export default {
-  components: { PlanetDetails },
+  components: { CharacterInfo, PlanetDetails, ListDetails },
   data(){ return {
-    infoLink: 'https://starwars.fandom.com/wiki/Battle_of_Yavin',
-    planet: false
+    focus: {
+      planet: false,
+      starships: false,
+      vehicles: false
+    }
   }},
 
   computed: {
     character() {
       return this.$store.getters.getActiveCharacter
+    },
+     starships() {
+      return this.$store.getters.getStarships
+    },
+    vehicles() {
+      return this.$store.getters.getVehicles
     }
   },
 
@@ -38,9 +43,20 @@ export default {
     hide() {
       this.$emit('hide')
     },
-    async showPlanet() {
-      await this.$store.dispatch('updatePlanet', this.character.homeworld)
-      this.planet = true
+    toggleShow(toShow) {
+      for (const key in this.focus) {
+        this.focus[key] = false
+      }
+      this.focus[toShow] = true
+    },
+    showPlanet() {
+      this.toggleShow('planet')
+    },
+    showStarships() {
+      this.toggleShow('starships')
+    },
+    showVehicles() {
+      this.toggleShow('vehicles')
     }
   }
 }
