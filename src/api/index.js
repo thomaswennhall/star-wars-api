@@ -9,7 +9,9 @@ const getData = async (url) => {
 
 const getCharactersByPage = async (page = 1) => {
   const data = await getData(`${BASE_URL}/people/?page=${page}`);
-  return data;
+  const characters = data.results;
+  const { count } = data;
+  return { characters, count };
 };
 
 const getDataFromArray = (urlArray) => {
@@ -20,6 +22,11 @@ const getDataFromArray = (urlArray) => {
   });
   return data;
 };
+
+/* const getCharactersByName = async (search) => {
+  const characters = await getData(`${BASE_URL}/people/?search=${search}`);
+  return characters;
+}; */
 
 module.exports = {
   getCharactersByPage,

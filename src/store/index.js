@@ -27,6 +27,9 @@ export default new Vuex.Store({
     setCharacters: (state, characters) => {
       state.characters = characters;
     },
+    setLastPage: (state, count) => {
+      state.lastPage = Math.ceil(count / 10);
+    },
     setPage: (state, direction) => {
       if (direction === "next") {
         if (state.currentPage === state.lastPage) {
@@ -57,8 +60,8 @@ export default new Vuex.Store({
     updateCharacters: async ({ commit, getters }) => {
       const page = getters.getCurrentPage;
       const data = await api.getCharactersByPage(page);
-      const characters = data.results;
-      commit("setCharacters", characters);
+      commit("setLastPage", data.count);
+      commit("setCharacters", data.characters);
     },
     updatePage: async ({ commit }, direction) => {
       commit("setPage", direction);
