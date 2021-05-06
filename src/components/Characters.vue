@@ -1,14 +1,17 @@
 <template>
   <section class="characters">
-    <ul>
-      <li v-for="character in characters" 
-        :key="character.name"
-        @click="showDetails(character)"
-      >
-        {{ character.name }}
-      </li>
-    </ul>
-    <PageButtons />
+    <article v-if="characters.length > 0">
+      <ul>
+        <li v-for="character in characters" 
+          :key="character.name"
+          @click="showDetails(character)"
+        >
+          {{ character.name }}
+        </li>
+      </ul>
+      <PageButtons />
+    </article>
+    <p v-else >your search gave no results</p>
   </section>
 </template>
 

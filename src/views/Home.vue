@@ -1,16 +1,18 @@
 <template>
   <div class="home">
+    <SearchBox />
     <Characters @showDetails="showDetails" />
     <CharacterDetails v-if="details" @hide="hideDetails"/>
   </div>
 </template>
 
 <script>
+import SearchBox from '@/components/SearchBox'
 import Characters from '@/components/Characters'
 import CharacterDetails from '@/components/CharacterDetails'
 
 export default {
-  components: { Characters, CharacterDetails },
+  components: { SearchBox, Characters, CharacterDetails },
 
   data(){ return {
     details: false

@@ -13,6 +13,7 @@ export default new Vuex.Store({
     planet: {},
     starships: [],
     vehicles: [],
+    searchValue: "",
   },
   getters: {
     getCurrentPage: (state) => state.currentPage,
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     getPlanet: (state) => state.planet,
     getStarships: (state) => state.starships,
     getVehicles: (state) => state.vehicles,
+    getSearchValue: (state) => state.searchValue,
   },
   mutations: {
     setCharacters: (state, characters) => {
@@ -43,6 +45,12 @@ export default new Vuex.Store({
         state.currentPage--;
       }
     },
+    resetPage: (state) => {
+      state.currentPage = 1;
+    },
+    setSearchValue: (state, searchValue) => {
+      state.searchValue = searchValue;
+    },
     setActiveCharacter: (state, character) => {
       state.activeCharacter = character;
     },
@@ -59,9 +67,14 @@ export default new Vuex.Store({
   actions: {
     updateCharacters: async ({ commit, getters }) => {
       const page = getters.getCurrentPage;
-      const data = await api.getCharactersByPage(page);
+      const search = getters.getSearchValue;
+      const data = await api.getCharactersByPage(search, page);
       commit("setLastPage", data.count);
       commit("setCharacters", data.characters);
+    },
+    updateSearchValue: ({ commit }, searchValue) => {
+      commit("setSearchValue", searchValue);
+      commit("resetPage");
     },
     updatePage: async ({ commit }, direction) => {
       commit("setPage", direction);
