@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="list-details">
     <p v-if="data.length < 1">Unknown</p>
-    <article v-else>
+    <article class="details" v-else>
       <ul>
         <li v-for="element in data" 
           :key="element.name"
@@ -21,4 +21,17 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+  .list-details{
+    background-color: $starwars-white;
+    padding: 0.6rem;
+
+    .details{
+      ul{
+        li{
+          padding: 0.3rem 0;
+        }
+      }
+    }
+  }
+</style>

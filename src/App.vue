@@ -15,6 +15,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -23,10 +25,15 @@ export default {
 
   #app{
     width: 100vw;
-    height: 100vh;
-    padding: 5%;
+    min-height: 100vh;
+    padding: 10%;
 
     background-color: $starwars-black;
+
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    button, input{
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    }
 
     display: flex;
     flex-direction: column;
@@ -34,6 +41,11 @@ export default {
     justify-content: space-evenly;
     .logo{
       max-width: 12rem;
+      margin-bottom: 1rem;
+    }
+
+    li{
+      list-style-type: none;
     }
   }
 </style>

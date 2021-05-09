@@ -1,8 +1,8 @@
 <template>
   <form class="search-box" v-on:submit.prevent="search">
     <input class="form-element input" type="text" v-model="input" >
-    <button class="form-element button search"><img src="../assets/lightsaber.png" alt="search"></button>
-    <button class="form-element button reset" @click="reset">reset</button>
+    <button class="form-element button search"><img src="../assets/lightsaber.svg" alt="search"></button>
+    <button class="form-element button reset" @click="reset"><img src="../assets/lightsaber-bw.svg" alt="reset search"></button>
   </form>
 </template>
 
@@ -14,6 +14,7 @@ export default {
 
   methods: {
     async search() {
+      this.input = ''
       await this.$store.dispatch('updateSearchValue', this.input)
       this.$store.dispatch('updateCharacters')
     },
@@ -28,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
   .search-box{
-    height: 3rem;
+    height: 2.6rem;
     width: 100%;
 
     display: flex;
@@ -40,8 +41,10 @@ export default {
       height: 100%;
 
       &.input{
-        width: 50%;
-        font-size: 2rem;
+        width: 80%;
+        font-size: 1rem;
+        padding: 0.6rem;
+        background-color: $starwars-white;
       }
 
       &.button{
@@ -49,13 +52,20 @@ export default {
         padding: 0.2rem;
         width: 10%;
 
-        &.search{
-          img{
-            height: 100%;
+        cursor: pointer;
+        
+        img{
+          width: 100%;
+          &:hover{
+            transform: scale(1.1);
           }
         }
+
         &.reset{
-          background-color: #fff;
+          background-color: $starwars-white;
+        }
+        &:hover{
+          background-color: $starwars-purple;
         }
       }
     }

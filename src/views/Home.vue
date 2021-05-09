@@ -31,6 +31,11 @@ export default {
   .home{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+    @media only screen and (min-width: 400px){
+      flex-direction: row;
+    }
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="planet-details">
     <p v-if="planet.name == 'unknown'">Unknown</p>
-    <article v-else>
+    <article class="details" v-else>
       <h3>{{ planet.name }}</h3>
       <ul>
         <li>Diameter: {{ planet.diameter }} km</li>
@@ -26,4 +26,17 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+  .planet-details{
+    background-color: $starwars-white;
+    padding: 0.6rem;
+
+    .details{
+      ul{
+        li{
+          padding: 0.3rem 0;
+        }
+      }
+    }
+  }
+</style>

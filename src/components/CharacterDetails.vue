@@ -1,11 +1,12 @@
 
 <template>
   <section class="character-details">
-    <button @click="hide" >hide details</button>
-    <CharacterInfo :character="character" />
-    <button @click="showPlanet" >planet</button>
-    <button @click="showStarships" >Starships</button>
-    <button @click="showVehicles" >Vehicles</button>
+    <CharacterInfo @hide="hide" :character="character" />
+    <nav class="info-nav">
+      <button @click="showPlanet" >Homeworld</button>
+      <button @click="showStarships" >Starships</button>
+      <button @click="showVehicles" >Vehicles</button>
+    </nav>
     <PlanetDetails v-if="focus.planet" />
     <ListDetails v-if="focus.starships" :data="starships" />
     <ListDetails v-if="focus.vehicles" :data="vehicles" />
@@ -62,6 +63,37 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.character-details{
+  width: 100%;
+  
+  .hide-button{
+    color: $starwars-white;
+    &:hover{
+      color: $starwars-purple;
+    }
+  }
 
+  .info-nav{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    button{
+      font-size: inherit;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      padding: 0.6rem;
+      color: $starwars-white;
+      &:hover{
+        color: $starwars-yellow;
+
+      }
+    }
+  }
+
+  @media only screen and (min-width: 400px){
+    width: 50%;
+  }
+}
 </style>
