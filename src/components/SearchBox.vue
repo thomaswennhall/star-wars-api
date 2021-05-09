@@ -1,5 +1,5 @@
 <template>
-  <form class="search-box" v-on:submit.prevent="search">
+  <form class="search-box" :class="$mq" v-on:submit.prevent="search">
     <input class="form-element input" type="text" v-model="input" >
     <button class="form-element button search"><img src="../assets/lightsaber.svg" alt="search"></button>
     <button class="form-element button reset" @click="reset"><img src="../assets/lightsaber-bw.svg" alt="reset search"></button>
@@ -66,6 +66,17 @@ export default {
         }
         &:hover{
           background-color: $starwars-purple;
+        }
+      }
+    }
+    &.laptop, &.desktop{
+      .input{
+        width: 84%;
+      }
+      .button{
+        width: 8%;
+        img{
+          transform: translate(0.7rem, -1.4rem) rotate(-140deg);
         }
       }
     }

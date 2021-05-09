@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <Characters @showDetails="showDetails" />
+  <div class="home" :class="$mq">
+    <Characters :detailsShowing="details" @showDetails="showDetails" @clicked="hideDetails"/>
     <CharacterDetails v-if="details" @hide="hideDetails"/>
   </div>
 </template>
@@ -34,8 +34,9 @@ export default {
     justify-content: space-between;
     flex-direction: column;
 
-    @media only screen and (min-width: 400px){
+    &.laptop, &.desktop{
       flex-direction: row;
+      padding-top: 2rem;
     }
   }
 </style>

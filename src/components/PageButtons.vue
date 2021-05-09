@@ -19,10 +19,12 @@ export default {
 
   methods: {
     async prevPage() {
+      this.$emit('clicked')
       await this.$store.dispatch('updatePage', 'prev')
       this.$store.dispatch('updateCharacters')
     },
     async nextPage() {
+      this.$emit('clicked')
       this.$store.dispatch('updatePage', 'next')
       this.$store.dispatch('updateCharacters')
     }
@@ -47,7 +49,7 @@ export default {
 
       font-size: 2rem;
       color: $starwars-white;
-      
+
       &:hover{
         color: #FFD624;
       }

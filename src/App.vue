@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="$mq">
     <img class="logo" src="./assets/star-wars-yellow.svg" alt="star wars logo">
     <SearchBox />
     <router-view/>
@@ -46,6 +46,14 @@ export default {
 
     li{
       list-style-type: none;
+    }
+
+    &.laptop, &.desktop{
+      padding: 5% 20%;
+
+      .logo{
+        margin-bottom: 2rem;
+      }
     }
   }
 </style>

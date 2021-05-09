@@ -53,6 +53,9 @@ export default {
     .name{
       color: $starwars-yellow;
     }
+    .hide-button{
+      cursor: pointer;
+    }
   }
   ul {
     width: 100%;

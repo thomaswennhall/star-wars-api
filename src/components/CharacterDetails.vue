@@ -1,11 +1,11 @@
 
 <template>
-  <section class="character-details">
+  <section class="character-details" :class="$mq">
     <CharacterInfo @hide="hide" :character="character" />
     <nav class="info-nav">
-      <button @click="showPlanet" >Homeworld</button>
-      <button @click="showStarships" >Starships</button>
-      <button @click="showVehicles" >Vehicles</button>
+      <button @click="showPlanet" :class="{highlight: focus.planet}" >Homeworld</button>
+      <button @click="showStarships" :class="{highlight: focus.starships}" >Starships</button>
+      <button @click="showVehicles" :class="{highlight: focus.vehicles}" >Vehicles</button>
     </nav>
     <PlanetDetails v-if="focus.planet" />
     <ListDetails v-if="focus.starships" :data="starships" />
@@ -66,7 +66,7 @@ export default {
 <style lang="scss">
 .character-details{
   width: 100%;
-  
+
   .hide-button{
     color: $starwars-white;
     &:hover{
@@ -92,8 +92,14 @@ export default {
     }
   }
 
-  @media only screen and (min-width: 400px){
-    width: 50%;
+  &.laptop, &.desktop{
+    width: 45%;
+
+    button{
+      &.highlight{
+        color: $starwars-yellow;
+      }
+    }
   }
 }
 </style>

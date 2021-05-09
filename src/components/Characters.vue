@@ -1,16 +1,17 @@
 <template>
-  <section class="characters">
+  <section class="characters" :class="$mq">
     <article class="character-list" v-if="characters.length > 0">
       <ul>
         <li
           v-for="character in characters"
           :key="character.name"
           @click="showDetails(character)"
+          :class="{highlight: selected == character.name && detailsShowing}"
         >
           {{ character.name }}
         </li>
       </ul>
-      <PageButtons />
+      <PageButtons @clicked="$emit('clicked')"/>
     </article>
     <p v-else>your search gave no results</p>
   </section>
@@ -22,6 +23,14 @@ import PageButtons from "./PageButtons";
 export default {
   components: { PageButtons },
 
+  props: {
+    detailsShowing: Boolean
+  },
+
+  data(){ return {
+    selected: ''
+  }},
+
   computed: {
     characters() {
       return this.$store.getters.getCharacters;
@@ -30,6 +39,7 @@ export default {
 
   methods: {
     async showDetails(character) {
+      this.selected = character.name
       this.$emit("showDetails");
       await this.$store.dispatch("updateActiveCharacter", character);
     },
@@ -69,18 +79,24 @@ export default {
         &:nth-child(even) {
           color: $starwars-white;
         }
-        &:hover {
-          background-color: $starwars-black;
+        &:hover, &.highlight {
+          background-color: transparent;
           color: $starwars-yellow;
         }
       }
     }
   }
-  @media only screen and (min-width: 400px){
-    width: 50%;
+  &.laptop, &.desktop{
+    width: 45%;
+    margin: 0;
 
     ul{
-      padding: 1rem;
+      li{
+        &.highlight {
+          text-align: right;
+          transform: scale(1.2);
+        }
+      }
     }
   }
 }
