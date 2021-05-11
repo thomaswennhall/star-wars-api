@@ -14,12 +14,14 @@ export default {
 
   methods: {
     async search() {
+      this.$emit('clicked')
       await this.$store.dispatch('updateSearchValue', this.input)
       this.$store.dispatch('updateCharacters')
       this.input = ''
     },
     async reset() {
       this.input = ''
+      this.$emit('clicked')
       await this.$store.dispatch('updateSearchValue', '')
       this.$store.dispatch('updateCharacters')
     }

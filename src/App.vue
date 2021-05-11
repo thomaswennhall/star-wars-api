@@ -7,22 +7,20 @@
         alt="star wars logo"
       />
       <h3 class="heading">CHARACTERS</h3>
-      <SearchBox />
-       <div class="credit-icons">
-      Icons made by <a href="" title="smalllikeart">smalllikeart</a> from
-      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-    </div>
+      <div class="credit-icons">
+        Icons made by <a href="" title="smalllikeart">smalllikeart</a> from
+        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+      </div>
     </header>
     <Home />
   </div>
 </template>
 
 <script>
-import SearchBox from "@/components/SearchBox";
 import Home from "@/views/Home";
 
 export default {
-  components: { SearchBox, Home },
+  components: { Home }
 };
 </script>
 
@@ -57,7 +55,11 @@ export default {
   justify-content: flex-start;
 
   header {
-    text-align: center;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .logo {
       max-width: 12rem;
@@ -69,9 +71,10 @@ export default {
       margin-bottom: 1rem;
     }
     .credit-icons {
-      text-align: left;
+      align-self: flex-start;
       font-size: 0.5rem;
       color: $starwars-white;
+      margin-bottom: 0.1rem;
       a {
         color: inherit;
       }
