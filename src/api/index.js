@@ -3,6 +3,11 @@ const axios = require("axios");
 const BASE_URL = "https://swapi.dev/api";
 
 const getData = async (url) => {
+  if (!url.startsWith("https")) {
+    const path = url.split(":")[1];
+    url = `https:${path}`;
+  }
+  console.log(url);
   const response = await axios.get(url);
   return response.data;
 };
