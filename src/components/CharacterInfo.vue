@@ -1,17 +1,25 @@
 <template>
   <article class="character-info">
     <div class="header">
-      <h3 class="name" v-if="$mq === 'mobile'" >{{ character.name }}</h3>
-      <p class="hide-button" @click="hide" >hide details</p>
+      <h3 class="name" v-if="$mq === 'mobile'">{{ character.name }}</h3>
+      <p class="hide-button" @click="hide">hide details</p>
     </div>
     <ul>
       <li>Birth year: {{ character.birth_year }} <span v-if="bby">*</span></li>
-      <li>Height: {{ character.height }} <span v-if="character.height != 'unknown'" >cm</span></li>
-      <li>Weight: {{ character.mass }} <span v-if="character.mass != 'unknown'" >kg</span></li>
+      <li>
+        Height: {{ character.height }}
+        <span v-if="character.height != 'unknown'">cm</span>
+      </li>
+      <li>
+        Weight: {{ character.mass }}
+        <span v-if="character.mass != 'unknown'">kg</span>
+      </li>
       <li>Eye color: {{ character.eye_color }}</li>
       <li>Hair color: {{ character.hair_color }}</li>
       <li>gender: {{ character.gender }}</li>
-      <li class="info-link" v-if="bby">*Before <a :href="infoLink" target="_blank">Battle of Yavin</a></li>
+      <li class="info-link" v-if="bby">
+        *Before <a :href="infoLink" target="_blank">Battle of Yavin</a>
+      </li>
     </ul>
   </article>
 </template>
@@ -19,24 +27,24 @@
 <script>
 export default {
   props: {
-    character: Object,
+    character: Object
   },
   data() {
     return {
-      infoLink: "https://starwars.fandom.com/wiki/Battle_of_Yavin",
-    };
+      infoLink: 'https://starwars.fandom.com/wiki/Battle_of_Yavin'
+    }
   },
   computed: {
     bby() {
-      return this.character.birth_year.endsWith("BBY");
-    },
+      return this.character.birth_year.endsWith('BBY')
+    }
   },
   methods: {
     hide() {
       this.$emit('hide')
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -46,14 +54,14 @@ export default {
   align-items: left;
   width: 100%;
 
-  .header{
+  .header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.6rem;
-    .name{
+    .name {
       color: $starwars-yellow;
     }
-    .hide-button{
+    .hide-button {
       cursor: pointer;
       font-size: 0.8rem;
     }
@@ -68,10 +76,10 @@ export default {
       color: $starwars-black;
     }
   }
- 
-  a{
+
+  a {
     color: inherit;
-    &:hover{
+    &:hover {
       color: $starwars-purple;
     }
   }

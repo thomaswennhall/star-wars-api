@@ -1,11 +1,16 @@
-
 <template>
   <section class="character-details" :class="$mq">
     <CharacterInfo @hide="hide" :character="character" />
     <nav class="info-nav">
-      <button @click="showPlanet" :class="{highlight: focus.planet}" >Homeworld</button>
-      <button @click="showStarships" :class="{highlight: focus.starships}" >Starships</button>
-      <button @click="showVehicles" :class="{highlight: focus.vehicles}" >Vehicles</button>
+      <button @click="showPlanet" :class="{ highlight: focus.planet }">
+        Homeworld
+      </button>
+      <button @click="showStarships" :class="{ highlight: focus.starships }">
+        Starships
+      </button>
+      <button @click="showVehicles" :class="{ highlight: focus.vehicles }">
+        Vehicles
+      </button>
     </nav>
     <PlanetDetails v-if="focus.planet" />
     <ListDetails v-if="focus.starships" :data="starships" />
@@ -20,19 +25,21 @@ import ListDetails from './ListDetails'
 
 export default {
   components: { CharacterInfo, PlanetDetails, ListDetails },
-  data(){ return {
-    focus: {
-      planet: false,
-      starships: false,
-      vehicles: false
+  data() {
+    return {
+      focus: {
+        planet: false,
+        starships: false,
+        vehicles: false
+      }
     }
-  }},
+  },
 
   computed: {
     character() {
       return this.$store.getters.getActiveCharacter
     },
-     starships() {
+    starships() {
       return this.$store.getters.getStarships
     },
     vehicles() {
@@ -64,43 +71,43 @@ export default {
 </script>
 
 <style lang="scss">
-.character-details{
+.character-details {
   width: 100%;
 
-  .hide-button{
+  .hide-button {
     color: $starwars-white;
-    &:hover{
+    &:hover {
       color: $starwars-purple;
     }
   }
 
-  .info-nav{
+  .info-nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
-    button{
+    button {
       font-size: inherit;
       outline: none;
       border: none;
       background-color: transparent;
       padding: 0.6rem;
       color: $starwars-white;
-      &:hover{
+      &:hover {
         color: $starwars-yellow;
       }
-      &.highlight{
+      &.highlight {
         color: $starwars-yellow;
       }
     }
   }
-  &.laptop{
+  &.laptop {
     width: 45%;
-    button{
+    button {
       font-size: 0.8rem;
       padding: 0.4rem;
     }
   }
-  &.desktop{
+  &.desktop {
     width: 45%;
   }
 }

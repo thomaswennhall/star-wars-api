@@ -3,9 +3,7 @@
     <p v-if="data.length < 1">Unknown</p>
     <article class="details" v-else>
       <ul>
-        <li v-for="element in data" 
-          :key="element.name"
-        >
+        <li v-for="element in data" :key="element.name">
           {{ element.name }}
         </li>
       </ul>
@@ -22,16 +20,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .list-details{
-    background-color: $starwars-white;
-    padding: 0.6rem;
+.list-details {
+  background-color: $starwars-white;
+  padding: 0.6rem;
 
-    .details{
-      ul{
-        li{
-          padding: 0.3rem 0;
-        }
+  .details {
+    ul {
+      li {
+        padding: 0.3rem 0;
       }
     }
   }
+}
 </style>

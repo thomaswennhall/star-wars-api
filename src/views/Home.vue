@@ -2,8 +2,12 @@
   <div class="home" :class="$mq">
     <SearchBox @clicked="hideDetails" />
     <section class="character-components">
-      <Characters :detailsShowing="details" @showDetails="showDetails" @clicked="hideDetails"/>
-      <CharacterDetails v-if="details" @hide="hideDetails"/>
+      <Characters
+        :detailsShowing="details"
+        @showDetails="showDetails"
+        @clicked="hideDetails"
+      />
+      <CharacterDetails v-if="details" @hide="hideDetails" />
     </section>
   </div>
 </template>
@@ -16,9 +20,11 @@ import CharacterDetails from '@/components/CharacterDetails'
 export default {
   components: { SearchBox, Characters, CharacterDetails },
 
-  data(){ return {
-    details: false
-  }},
+  data() {
+    return {
+      details: false
+    }
+  },
 
   methods: {
     showDetails() {
@@ -32,20 +38,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .home{
-    .character-components{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
+.home {
+  .character-components {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
 
-    }
-
-    &.laptop, &.desktop{
-      .character-components{
-        flex-direction: row;
-        padding-top: 2rem;
-      }
+  &.laptop,
+  &.desktop {
+    .character-components {
+      flex-direction: row;
+      padding-top: 2rem;
     }
   }
+}
 </style>

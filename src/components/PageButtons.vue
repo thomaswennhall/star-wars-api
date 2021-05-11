@@ -33,26 +33,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-buttons{
-    display: flex;
-    align-items: center;
-    place-self: center;
+.page-buttons {
+  display: flex;
+  align-items: center;
+  place-self: center;
 
-    font-weight: 600;
+  font-weight: 600;
+  color: $starwars-white;
+
+  button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    margin: 0 1rem;
+
+    font-size: 2rem;
     color: $starwars-white;
 
-    button{
-      outline: none;
-      background-color: transparent;
-      border: none;
-      margin: 0 1rem;
-
-      font-size: 2rem;
-      color: $starwars-white;
-
-      &:hover{
-        color: #FFD624;
-      }
+    &:hover {
+      color: #ffd624;
     }
   }
+}
 </style>

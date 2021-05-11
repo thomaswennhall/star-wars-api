@@ -9,7 +9,9 @@
       <h3 class="heading">CHARACTERS</h3>
       <div class="credit-icons">
         Icons made by <a href="" title="smalllikeart">smalllikeart</a> from
-        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        <a href="https://www.flaticon.com/" title="Flaticon"
+          >www.flaticon.com</a
+        >
       </div>
     </header>
     <Home />
@@ -17,15 +19,15 @@
 </template>
 
 <script>
-import Home from "@/views/Home";
+import Home from '@/views/Home'
 
 export default {
   components: { Home }
-};
+}
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 * {
   margin: 0;
@@ -34,10 +36,10 @@ export default {
 }
 
 #app {
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   button,
   input {
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
   }
   li {
     list-style-type: none;
@@ -68,7 +70,7 @@ export default {
       color: $starwars-yellow;
       font-weight: 400;
       letter-spacing: 5px;
-      margin-bottom: 1rem;
+      margin-bottom: 3.5rem;
     }
     .credit-icons {
       align-self: flex-start;
@@ -81,12 +83,19 @@ export default {
     }
   }
 
-
   &.laptop {
     padding: 5% 14%;
+
+    .heading{
+      margin-bottom: 2rem;
+    }
   }
   &.desktop {
-    padding: 5% 20%;
+    padding: 2% 20%;
+    
+    .heading{
+      margin-bottom: 2rem;
+    }
   }
 }
 </style>
