@@ -13,7 +13,8 @@
       </ul>
       <PageButtons @clicked="$emit('clicked')"/>
     </article>
-    <p v-else>your search gave no results</p>
+    <p v-else-if="loading" class="white-text">loading...</p>
+    <p v-else class="white-text">your search gave no results</p>
   </section>
 </template>
 
@@ -28,7 +29,8 @@ export default {
   },
 
   data(){ return {
-    selected: ''
+    selected: '',
+    loading: true
   }},
 
   computed: {
@@ -47,6 +49,7 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("updateCharacters");
+    this.loading = false
   },
 };
 </script>
@@ -57,12 +60,17 @@ export default {
   width: 100%;
   margin: 2rem 0;
 
+  .white-text{
+    color: $starwars-white;
+  }
+
   .character-list {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    height: 100%;
     
     ul {
       width: 100%;

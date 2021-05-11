@@ -3,7 +3,7 @@ import VueMq from "vue-mq";
 
 Vue.use(VueMq, {
   breakpoints: {
-    mobile: 550,
+    mobile: 650,
     laptop: 1250,
     desktop: Infinity,
   },

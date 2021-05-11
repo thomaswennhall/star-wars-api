@@ -6,8 +6,8 @@
     </div>
     <ul>
       <li>Birth year: {{ character.birth_year }} <span v-if="bby">*</span></li>
-      <li>Height: {{ character.height }} cm</li>
-      <li>Weight: {{ character.mass }} kg</li>
+      <li>Height: {{ character.height }} <span v-if="character.height != 'unknown'" >cm</span></li>
+      <li>Weight: {{ character.mass }} <span v-if="character.mass != 'unknown'" >kg</span></li>
       <li>Eye color: {{ character.eye_color }}</li>
       <li>Hair color: {{ character.hair_color }}</li>
       <li>gender: {{ character.gender }}</li>
@@ -55,6 +55,7 @@ export default {
     }
     .hide-button{
       cursor: pointer;
+      font-size: 0.8rem;
     }
   }
   ul {

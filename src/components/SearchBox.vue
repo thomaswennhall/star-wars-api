@@ -1,7 +1,7 @@
 <template>
   <form class="search-box" :class="$mq" v-on:submit.prevent="search">
     <input class="form-element input" type="text" v-model="input" >
-    <button class="form-element button search"><img src="../assets/lightsaber.svg" alt="search"></button>
+    <button class="form-element button search" type="submit"><img src="../assets/lightsaber.svg" alt="search"></button>
     <button class="form-element button reset" @click="reset"><img src="../assets/lightsaber-bw.svg" alt="reset search"></button>
   </form>
 </template>
@@ -14,9 +14,9 @@ export default {
 
   methods: {
     async search() {
-      this.input = ''
       await this.$store.dispatch('updateSearchValue', this.input)
       this.$store.dispatch('updateCharacters')
+      this.input = ''
     },
     async reset() {
       this.input = ''
@@ -56,9 +56,6 @@ export default {
         
         img{
           width: 100%;
-          &:hover{
-            transform: scale(1.1);
-          }
         }
 
         &.reset{
@@ -66,19 +63,28 @@ export default {
         }
         &:hover{
           background-color: $starwars-purple;
+          transform: scale(1.1);
+
         }
       }
     }
-    &.laptop, &.desktop{
+    &.desktop{
       .input{
         width: 84%;
       }
       .button{
         width: 8%;
         img{
-          transform: translate(0.7rem, -1.4rem) rotate(-140deg);
+          transform: translate(-0.7rem, 0.4rem) rotate(40deg);
         }
       }
     }
+    &.laptop{
+      .button{
+        img{
+          transform: translate(-0.4rem, 0.4rem) rotate(30deg);
+        }
+      }
+    } 
   }
 </style>

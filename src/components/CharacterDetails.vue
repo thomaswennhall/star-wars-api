@@ -87,19 +87,21 @@ export default {
       color: $starwars-white;
       &:hover{
         color: $starwars-yellow;
-
       }
-    }
-  }
-
-  &.laptop, &.desktop{
-    width: 45%;
-
-    button{
       &.highlight{
         color: $starwars-yellow;
       }
     }
+  }
+  &.laptop{
+    width: 45%;
+    button{
+      font-size: 0.8rem;
+      padding: 0.4rem;
+    }
+  }
+  &.desktop{
+    width: 45%;
   }
 }
 </style>
